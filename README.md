@@ -16,8 +16,7 @@ Pursue.Extension.Cache 是Pursue系列缓存管理库，支持.NET6+，提供了
 dotnet add package Pursue.Extension.Cache
 ```
 
-## 使用示例
-
+## 快速开始
 以下是一个简单的使用示例：
 
 ```csharp
