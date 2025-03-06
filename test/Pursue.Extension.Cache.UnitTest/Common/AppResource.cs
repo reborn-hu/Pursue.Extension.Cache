@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pursue.Extension.Cache.DependencyInjection;
+using Pursue.Extension.DependencyInjection;
 using System;
 
 namespace Pursue.Extension.Cache.UnitTest
@@ -18,7 +18,7 @@ namespace Pursue.Extension.Cache.UnitTest
                 var service = new ServiceCollection();
 
                 service.AddLogging();
-                service.AddCacheClient(o => o.UseCacheSettingsOptions(config));
+                service.AddCacheClient(o => o.UseCacheConfigOptions(config));
 
                 ServiceProvider = service.BuildServiceProvider();
             }

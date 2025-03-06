@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Pursue.Extension.Cache.Demo.src;
-using Pursue.Extension.Cache.DependencyInjection;
+using Pursue.Extension.DependencyInjection;
 using System;
 using System.Text;
 
@@ -24,7 +24,7 @@ try
 
         service.AddCacheClient(option =>
         {
-            option.UseCacheSettingsOptions(config);
+            option.UseCacheConfigOptions(config);
         });
 
         service.AddHostedService<RedisQueueDemo>();
