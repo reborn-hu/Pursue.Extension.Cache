@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Pursue.Extension.Cache.DependencyInjection;
+using Pursue.Extension.DependencyInjection;
 using System.Collections.Concurrent;
 
 namespace Pursue.Extension.Cache
@@ -29,7 +29,7 @@ namespace Pursue.Extension.Cache
         /// <returns></returns>
         public static RedisClient GetRedisClient(string nodeSection = "Default")
         {
-            var connectionSettings = CacheOptions.ConnectionSettings[nodeSection];
+            var connectionSettings = CacheConfigOptions.ConnectionSettings[nodeSection];
             if (connectionSettings != null && connectionSettings.Endpoints.Count > 0)
             {
                 var db = (connectionSettings.Database <= 0 || connectionSettings.Database >= 254) ? 0 : connectionSettings.Database;

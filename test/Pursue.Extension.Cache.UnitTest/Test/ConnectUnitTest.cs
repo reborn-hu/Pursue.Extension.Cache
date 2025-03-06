@@ -1,4 +1,5 @@
-﻿using Pursue.Extension.Cache.UnitTest.Init;
+﻿using Pursue.Extension.Cache.Memory;
+using Pursue.Extension.Cache.UnitTest.Init;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
 

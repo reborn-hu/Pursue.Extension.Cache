@@ -132,13 +132,13 @@ namespace Pursue.Extension.Cache
                 if (valueResult.TryAdd(dataKey, value))
                 {
                     _cache.Remove(key);
-                    _cache.Set(key, valueResult, CacheOptions.MemoryCacheEntryOptions);
+                    _cache.Set(key, valueResult, CacheConfigOptions.MemoryCacheEntryOptions);
                     result = true;
                 }
             }
             else
             {
-                _cache.Set(key, new Dictionary<string, object> { { dataKey, value } }, CacheOptions.MemoryCacheEntryOptions);
+                _cache.Set(key, new Dictionary<string, object> { { dataKey, value } }, CacheConfigOptions.MemoryCacheEntryOptions);
                 result = true;
             }
             return result;
@@ -160,7 +160,7 @@ namespace Pursue.Extension.Cache
             {
                 _cache.Remove(key);
             }
-            _cache.Set(key, valueDics, CacheOptions.MemoryCacheEntryOptions);
+            _cache.Set(key, valueDics, CacheConfigOptions.MemoryCacheEntryOptions);
             return true;
         }
 

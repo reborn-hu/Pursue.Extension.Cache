@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Pursue.Extension.Cache.Memory;
+using System.Collections.Generic;
 
 namespace Pursue.Extension.Cache.Demo.src
 {

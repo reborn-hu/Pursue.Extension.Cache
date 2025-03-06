@@ -1,8 +1,51 @@
-﻿using System.Collections.Concurrent;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Pursue.Extension.Cache
 {
+    public sealed class CacheConfigOptions
+    {
+        /// <summary>
+        /// Key 前缀
+        /// -- 默认: pursue:
+        /// </summary>
+        internal static string Prefix { get; private set; } = "pursue:";
+
+        /// <summary>
+        /// Redis配置
+        /// </summary>
+        internal static ConcurrentDictionary<string, RedisConnectionConfig> ConnectionSettings { get; private set; }
+
+        /// <summary>
+        /// MemoryCache配置
+        /// </summary>
+        internal static MemoryCacheEntryOptions MemoryCacheEntryOptions { get; set; } = new MemoryCacheEntryOptions()
+        {
+            Size = 100 * 1024,
+            SlidingExpiration = TimeSpan.FromSeconds(150)
+        };
+
+        /// <summary>
+        /// 配置自定义分布式缓存和本地缓存
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="redisSection"></param>
+        /// <returns></returns>
+        public CacheConfigOptions UseCacheConfigOptions(IConfiguration configuration, string redisSection = "Configuration:Redis")
+        {
+            var redisConfig = configuration.GetSection(redisSection).Get<RedisSettingsRoot>();
+
+            Prefix = redisConfig.Prefix;
+            ConnectionSettings = redisConfig.ConnectionSettings;
+
+            return this;
+        }
+    }
+
     public sealed class RedisSettingsRoot
     {
         /// <summary>
@@ -92,5 +135,50 @@ namespace Pursue.Extension.Cache
         /// -- ConnectType = RedisConnectType.sentinel 时启用该连接配置
         /// </summary>
         public List<RedisEndpoint> Sentinels { get; set; } = new List<RedisEndpoint>();
+    }
+
+    public sealed class RedisEndpoint
+    {
+        /// <summary>
+        /// 连接IP
+        /// </summary>
+        public string Host { get; set; }
+
+        /// <summary>
+        /// 连接Port
+        /// </summary>
+        public int Port { get; set; }
+    }
+
+    public enum RedisConnectType
+    {
+        [Description("集群")]
+        Cluster,
+
+        [Description("哨兵")]
+        Sentinel,
+
+        [Description("主从")]
+        Main,
+
+        [Description("单例")]
+        Single
+    }
+
+    public enum RedisProtocolType
+    {
+        /// <summary>
+        /// Redis Server 6.X之前老协议
+        /// </summary>
+        [Description("Redis Server 6.X之前老协议")]
+        RESP2,
+
+        /// <summary>
+        /// Redis Server 6.X之后高级协议
+        /// -- 基于新版协议有新特性支持
+        /// -- 具体参考：https://raw.githubusercontent.com/redis/redis/6.0/00-RELEASENOTES
+        /// </summary>
+        [Description("Redis Server 6.X之后高级协议")]
+        RESP3
     }
 }

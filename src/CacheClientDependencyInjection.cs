@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Pursue.Extension.Cache;
 using System;
 
-namespace Pursue.Extension.Cache.DependencyInjection
+namespace Pursue.Extension.DependencyInjection
 {
     public static class CacheClientDependencyInjection
     {
@@ -15,16 +15,16 @@ namespace Pursue.Extension.Cache.DependencyInjection
         /// <param name="options">缓存配置</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static IServiceCollection AddCacheClient(this IServiceCollection services, Action<CacheOptions> options)
+        public static IServiceCollection AddCacheClient(this IServiceCollection services, Action<CacheConfigOptions> options)
         {
             if (options == null || options == null)
             {
                 throw new ArgumentNullException(nameof(options), $"缓存配置不可为空！");
             }
 
-            options.Invoke(new CacheOptions());
+            options.Invoke(new CacheConfigOptions());
 
-            services.AddSingleton<CacheOptions>();
+            services.AddSingleton<CacheConfigOptions>();
 
             services.AddMemoryCache();
             services.AddSingleton<MemoryClient>();

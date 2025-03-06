@@ -27,7 +27,7 @@ namespace Pursue.Extension.Cache
                     sb.AppendFormat($"{single.Host}:{single.Port}");
                     sb.AppendFormat(",password={0}", connectionConfig.Password);
                     sb.AppendFormat(",defaultDatabase={0}", db);
-                    sb.AppendFormat(",prefix={0}", CacheOptions.Prefix);
+                    sb.AppendFormat(",prefix={0}", CacheConfigOptions.Prefix);
                     sb.AppendFormat(",poolsize={0}", connectionConfig.PoolSize);
                     sb.AppendFormat(",connectTimeout={0}", connectionConfig.ConnectTimeout);
                     sb.AppendFormat(",syncTimeout={0}", connectionConfig.SyncTimeout);
@@ -43,7 +43,7 @@ namespace Pursue.Extension.Cache
                     sb.AppendFormat($"{cluster.Host}:{cluster.Port}");
                     sb.AppendFormat(",password={0}", connectionConfig.Password);
                     sb.AppendFormat(",defaultDatabase=0");
-                    sb.AppendFormat(",prefix={0}", CacheOptions.Prefix);
+                    sb.AppendFormat(",prefix={0}", CacheConfigOptions.Prefix);
                     sb.AppendFormat(",poolsize={0}", connectionConfig.PoolSize);
                     sb.AppendFormat(",connectTimeout={0}", connectionConfig.ConnectTimeout);
                     sb.AppendFormat(",syncTimeout={0}", connectionConfig.SyncTimeout);
@@ -57,7 +57,7 @@ namespace Pursue.Extension.Cache
                     sb.AppendFormat(connectionConfig.SentinelMain);
                     sb.AppendFormat(",password={0}", connectionConfig.Password);
                     sb.AppendFormat(",defaultDatabase={0}", connectionConfig.Database);
-                    sb.AppendFormat(",prefix={0}", CacheOptions.Prefix);
+                    sb.AppendFormat(",prefix={0}", CacheConfigOptions.Prefix);
                     sb.AppendFormat(",poolsize={0}", connectionConfig.PoolSize);
                     sb.AppendFormat(",connectTimeout={0}", connectionConfig.ConnectTimeout);
                     sb.AppendFormat(",syncTimeout={0}", connectionConfig.SyncTimeout);
