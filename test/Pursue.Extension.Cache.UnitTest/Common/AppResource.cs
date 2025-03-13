@@ -17,7 +17,6 @@ namespace Pursue.Extension.Cache.UnitTest
 
                 var service = new ServiceCollection();
 
-                service.AddLogging();
                 service.AddCacheClient(o => o.UseCacheConfigOptions(config));
 
                 ServiceProvider = service.BuildServiceProvider();
